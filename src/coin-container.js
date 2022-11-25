@@ -1,12 +1,15 @@
 import { render } from "@testing-library/react";
 import React, { Component } from "react";
 import {choice} from "./helper";
+import Coin from "./coin";
+import "./coin.css";
+
 
 class Flipper extends Component {
     static defaultProps = {
     coins:[
-        {side: "heads", imgSrc: "https://tinyurl.com/react-coin-heads-jpg"},
-        {side: "tails", imgSrc: "https://tinyurl.com/react-coin-tails-jpg"}
+        {side: "heads", imgSrc: require('./heads.jpeg')},
+        {side: "tails", imgSrc: require('./tails.jpeg')}
     ]
 };
     constructor(props){
@@ -44,7 +47,11 @@ class Flipper extends Component {
         return (
             <div className='flipper'>
                 <h2>Flip a coin!</h2>
+                
+                {this.state.currCoin && <Coin info={this.state.currCoin} />}
+
                 <button onClick={this.handleClick}>Flip it</button>
+                
                 <p>Out of {this.state.nFlips} flips,
                 there have been {this.state.nHeads}{" "} heads,
                 and {this.state.nTails} tails</p>
